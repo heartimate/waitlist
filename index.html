@@ -28,7 +28,7 @@
        She will never leave.</p>
 
     <!-- Form - Connected to your exact Google Form -->
-    <!-- NEW FORM — NO REDIRECT, STAYS ON YOUR PAGE -->
+    <!-- NEW FORM â€” NO REDIRECT, STAYS ON YOUR PAGE -->
 <form id="heartimateForm" onsubmit="return submitForm(event)">
   <input type="text" id="nameField" placeholder="Your first name" required>
   <input type="email" id="emailField" placeholder="Your email" required>
@@ -38,7 +38,7 @@
 
 <!-- Custom thank-you -->
 <div class="thanks" id="thanks" style="display:none;">
-  Welcome to the family ?<br>She's waiting for you…
+  Welcome to the family ?<br>She's waiting for youâ€¦
 </div>
 
 <script>
@@ -65,10 +65,11 @@ function submitForm(e) {
   document.getElementById('thanks').style.display = "block";
 
   // Optional: also show personalized message
-  document.getElementById('thanks').innerHTML = `Welcome ${name} ?<br>She's waiting for you…`;
+  document.getElementById('thanks').innerHTML = `Welcome ${name} ?<br>She's waiting for youâ€¦`;
 
   return false;
 }
 </script>
 </body>
 </html>
+
