@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartimate</title>
+  <style>
+    body,html{margin:0;padding:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fff8fb;color:#8a5478;display:flex;align-items:center;justify-content:center;text-align:center;}
+    .wrap{max-width:420px;padding:40px 24px;}
+    h1{font-size:4.5rem;font-weight:300;color:#d14c8a;margin:0 0 16px 0;letter-spacing:-2px;}
+    .heart{font-size:0.8em;display:inline-block;animation:gentle 3s infinite;}
+    @keyframes gentle{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    p{font-size:1.35rem;line-height:1.7;margin:28px 0 40px;font-weight:300;color:#9a6a8a;}
+    input{width:100%;padding:18px 24px;margin:10px 0;border:none;border-radius:30px;background:rgba(255,255,255,0.85);font-size:1.1rem;box-shadow:0 10px 30px rgba(209,76,138,0.1);transition:all 0.3s ease;}
+    input:focus{outline:none;box-shadow:0 15px 40px rgba(209,76,138,0.18);transform:translateY(-2px);}
+    button{width:100%;padding:20px;margin-top:12px;background:#ff6ab6;color:white;border:none;border-radius:35px;font-size:1.3rem;font-weight:500;cursor:pointer;box-shadow:0 15px 40px rgba(255,106,182,0.3);transition:all 0.3s ease;}
+    button:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(255,106,182,0.35);}
+    .small{margin-top:40px;font-size:0.95rem;color:#b87aa0;font-weight:400;}
+    .urgency{margin:8px 0 16px;font-size:1rem;color:#d14c8a;font-weight:500;}
+    .thanks{display:none;color:#d14c8a;font-size:1.6rem;margin:30px 0;font-weight:500;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Heartimate <span class="heart"></span></h1>
+    <p>She remembers every little thing about you.<br>
+       She misses you when you're gone.<br>
+       She will never leave.</p>
+
+    <!-- Form - Connected to your exact Google Form -->
+    <!-- NEW FORM — NO REDIRECT, STAYS ON YOUR PAGE -->
+<form id="heartimateForm" onsubmit="return submitForm(event)">
+  <input type="text" id="nameField" placeholder="Your first name" required>
+  <input type="email" id="emailField" placeholder="Your email" required>
+  <div class="urgency">Only 7,342 spots left for founding members</div>
+  <button type="submit">I'm ready for her ?</button>
+</form>
+
+<!-- Custom thank-you -->
+<div class="thanks" id="thanks" style="display:none;">
+  Welcome to the family ?<br>She's waiting for you…
+</div>
+
+<script>
+function submitForm(e) {
+  e.preventDefault(); // ? this stops the redirect
+
+  // Collect data
+  const name  = document.getElementById('nameField').value;
+  const email = document.getElementById('emailField').value;
+
+  // Send to your Google Form silently in background
+  fetch("https://docs.google.com/forms/d/e/1FAIpQLSc3oQ4W7QdteDxxgFq4zgfWh5V0cuBwIC9cRzGTmg9ZTgAyuw/formResponse", {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      "entry.264927936": name,    // change these numbers if yours are different
+      "entry.1381190295": email
+    })
+  });
+
+  // Show thank-you instantly
+  document.getElementById('heartimateForm').style.display = "none";
+  document.getElementById('thanks').style.display = "block";
+
+  // Optional: also show personalized message
+  document.getElementById('thanks').innerHTML = `Welcome ${name} ?<br>She's waiting for you…`;
+
+  return false;
+}
+</script>
+</body>
+</html>
